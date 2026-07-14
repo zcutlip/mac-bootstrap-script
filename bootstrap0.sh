@@ -8,7 +8,7 @@
 # no git server addresses or paths.
 #
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/<you>/bootstrap/main/bootstrap0.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/zcutlip/mac-bootstrap-script/refs/heads/main/bootstrap0.sh | bash
 #   OR
 #   bash bootstrap0.sh
 #
