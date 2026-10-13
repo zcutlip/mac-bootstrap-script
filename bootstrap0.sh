@@ -207,7 +207,9 @@ verify_ssh_auth() {
 
     # Try to connect to the git server (git servers typically reject shell sessions)
     # We expect either a success or a "shell access denied" message, but not "permission denied"
-    if ssh -T -o ConnectTimeout=10 -o StrictHostKeyChecking=accept-new "$ssh_host" 2>&1 | grep -qE "denied \(publickey|permission denied"; then
+    # -n: stdin /dev/null so an auth'd login server opens a shell that sees
+    # immediate EOF and exits; without it the session stays open forever.
+    if ssh -n -T -o ConnectTimeout=10 -o StrictHostKeyChecking=accept-new "$ssh_host" 2>&1 | grep -qE "denied \(publickey|permission denied"; then
         log_error "SSH authentication to $ssh_host failed"
         log_error "Please verify:"
         log_error "  - 1Password SSH agent is enabled"
